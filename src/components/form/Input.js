@@ -5,10 +5,19 @@ import { FormContext } from '../../context';
 /**
  * This component must be used in conjunction with FormContextProvider
  */
-function Input({ type, id, value, onChange, onBlur, required, isInvalid, title }) {
+function Input({
+  type,
+  id,
+  className,
+  title,
+  value,
+  onChange,
+  onBlur, isInvalid,
+  required,
+  readOnly }) {
+  className += ' form-control';
   const { editedInputs, setLastEditedInput, setEditedInputs } = useContext(FormContext);
   const [currentValue, setCurrentValue] = useState(value);
-  let className = 'form-control';
   const wrappedOnChange = (event) => {
     setCurrentValue(event.target.value);
     if (typeof onChange === 'function') {
@@ -39,6 +48,10 @@ function Input({ type, id, value, onChange, onBlur, required, isInvalid, title }
     required = false;
   }
 
+  if (typeof readOnly === 'undefined') {
+    readOnly = false;
+  }
+
   if (typeof isInvalid !== 'undefined' && isInvalid) {
     className += ' is-invalid';
   }
@@ -55,7 +68,8 @@ function Input({ type, id, value, onChange, onBlur, required, isInvalid, title }
       title={title}
       onChange={(event) => wrappedOnChange(event)}
       onBlur={() => wrappedOnBlur(currentValue, editedInputs)}
-      required={required} />
+      required={required}
+      readOnly={readOnly} />
   );
 }
 
