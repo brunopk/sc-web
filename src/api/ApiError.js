@@ -3,9 +3,9 @@
  */
 class ApiError {
   constructor(httpStatus, httpStatusText) {
-    this.httpStatus = httpStatus;
-    this.httpStatusText = httpStatusText;
+    this.httpStatus = httpStatus
+    this.httpStatusText = httpStatusText
   }
 }
 
-export default ApiError;
+export default ApiError

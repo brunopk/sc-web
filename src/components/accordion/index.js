@@ -1,4 +1,3 @@
-import Accordion from './Accordion';
-import Card from './Card';
+import Card from './Card'
 
-export { Accordion, Card };
+export default Card

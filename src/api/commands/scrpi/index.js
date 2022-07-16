@@ -1,5 +1,5 @@
-import { sendRequest } from '../../common';
-import API_ENDPOINTS from '../../endpoints';
+import { sendRequest } from '../../common'
+import API_ENDPOINTS from '../../endpoints'
 
 /**
  * Check the device status
@@ -11,7 +11,7 @@ async function cmdScrpiStatus({ token }) {
     token,
     url: API_ENDPOINTS.CMD_SCRPI_STATUS.URL,
     method: API_ENDPOINTS.CMD_SCRPI_STATUS.METHOD,
-  });
+  })
 }
 
 /**
@@ -27,7 +27,7 @@ async function cmdScrpiConnect({ token, address, port }) {
     method: API_ENDPOINTS.CMD_SCRPI_STATUS.METHOD,
     token,
     body: { address, port }
-  });
+  })
 }
 
-export { cmdScrpiStatus, cmdScrpiConnect };
+export { cmdScrpiStatus, cmdScrpiConnect }

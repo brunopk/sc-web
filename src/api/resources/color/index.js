@@ -1,5 +1,5 @@
-import { sendRequest } from '../../common';
-import API_ENDPOINTS from '../../endpoints';
+import { sendRequest } from '../../common'
+import API_ENDPOINTS from '../../endpoints'
 
 /**
  * List colors
@@ -11,7 +11,7 @@ async function getColor({ token }) {
     token,
     url: API_ENDPOINTS.GET_COLOR.URL,
     method: API_ENDPOINTS.GET_COLOR.METHOD,
-  });
+  })
 }
 
-export default getColor;
+export default getColor
