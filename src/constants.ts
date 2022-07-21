@@ -93,7 +93,8 @@ export const SIZE = {
   S67: 2,
   S70: 2.500, // = 5 / 2
   S80: 5,
-  S90: 14
+  S90: 14,
+  S92: 18
 }
 
 export const INF = '∞'
