@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import $ from 'jquery'
-import { Form, ModalBody, ModalFooter, Button } from '@bootstrap-styled/v4'
+import { Form, ModalBody, ModalFooter } from '@bootstrap-styled/v4'
 import { bp } from '@bootstrap-styled/css-mixins/lib'
 import { InputHidden } from '../form'
-import { SecondaryButton } from '../buttons'
+import { PrimaryButton, SecondaryButton } from '../buttons'
 import { Context } from './Context'
 
 interface WizardStepProps {
@@ -16,7 +16,7 @@ interface WizardStepProps {
   confirmButtonText?: string
 }
 
-const Confirm = styled(Button)`
+const Confirm = styled(PrimaryButton)`
   ${(props) => bp.down('sm', props.theme['$grid-layout'], 'flex-grow:1!important;')};
 `
 
@@ -24,7 +24,7 @@ const Back = SecondaryButton
 
 const Cancel = SecondaryButton
 
-const Next = Button
+const Next = PrimaryButton
 
 function WizardStep({
   children,

@@ -41,11 +41,10 @@ export default class Wizard {
     return new Button('FINISH', () => { this.close() })
   }
 
-  // eslint-disable-next-line class-methods-use-this
   getSecondaryButton(): Button {
     if (this.currentStep === 0) {
-      // TODO: not finished
-      return new Button('CANCEL', () => { throw new Error('Not implemented') })
+      // TODO: This should clear wizard form data
+      return new Button('CANCEL', () => { this.close() })
     }
     return new Button('BACK', () => { this.prev() })
   }

@@ -1,5 +1,5 @@
 import Form from './Form'
-import Input from './InputComponentWrapper'
+import Input from './Input'
 import InputHidden from './InputHidden'
 import Text from './Text'
 

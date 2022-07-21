@@ -1,18 +1,23 @@
-/* eslint-disable no-shadow */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 import styled from 'styled-components'
 import * as BootstrapComponents from '@bootstrap-styled/v4'
 import { SIZE } from '../../constants'
+
+// eslint-disable-next-line no-unused-vars
+type OnChangeType = (event: ChangeEvent<HTMLInputElement>) => void
+
+type OnBlurType = () => void
 
 type InputProps = {
   type: 'text' | 'number',
   className?: string,
   value: string | number,
   name: string,
-  error: boolean,
+  error?: boolean,
   required?: boolean,
   readOnly?: boolean,
-  onBlur?: () => void
+  onBlur?: OnBlurType,
+  onChange?: OnChangeType
 }
 
 const Input = styled(BootstrapComponents.Input)`
@@ -31,9 +36,15 @@ export default ({
   error = false,
   required = false,
   readOnly = false,
-  onBlur = () => null
+  onBlur = () => null,
+  onChange = () => null
 } : InputProps) => {
   const [valueAux, setValueAux] = useState(value)
+  const onChangeWrapper = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(event)
+    setValueAux(event.target.value)
+  }
+
   useEffect(() => {
     setValueAux(value)
   }, [value])
@@ -46,7 +57,7 @@ export default ({
       className={className}
       value={valueAux}
       onBlur={() => onBlur()}
-      onChange={(event) => setValueAux(event.target.value)}
+      onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeWrapper(event)}
       required={required}
       readOnly={readOnly} />
   )
