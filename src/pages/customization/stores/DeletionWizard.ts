@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from 'mobx'
-import { Option } from '../../../components/option-list/AvailableOptions'
+import { Option } from '../../../components/selection/types'
 import Wizard from '../../../stores/wizard'
 import SelectionModes from '../SelectionModes'
 

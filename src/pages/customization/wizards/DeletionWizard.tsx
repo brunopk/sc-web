@@ -4,11 +4,13 @@ import { bp } from '@bootstrap-styled/css-mixins/lib'
 import { Container, Row } from '@bootstrap-styled/v4'
 import { observer } from 'mobx-react-lite'
 import { Modal } from '../../../components/modal'
-import { buildOptionList } from '../../../components/option-list'
 import { Text, Input } from '../../../components/form'
+import { Type } from '../../../components/selection/types'
+import { ColorSelector, Selector } from '../../../components/selection'
 import { StoreContext } from '../../../context'
 import { SIZE } from '../../../constants'
-import AvailableSelectionModes from '../SelectionModes'
+import SelectionModes from '../SelectionModes'
+
 
 // TODO: improve this to avoid using .modal the user should not know there is a "modal" class
 const StyledModal = styled(Modal)`
@@ -30,9 +32,7 @@ const StyledInput = styled(Input)`
 `
 
 // TODO: edit JSX for each step using components similar to SectionCreator
-// TODO: fix margin/paddings on the first step of this modal (set fixed size for lg screens)
 // TODO: use methods from mobx store for onSelect attribute of SelectionModes component
-const SelectionModes = buildOptionList(AvailableSelectionModes)
 
 /*
  <Text>Delete all sections with the same color.</Text>
@@ -61,13 +61,15 @@ export default observer(() => {
       primaryBtn={{ text: primaryButton.text, onClick: primaryButton.action }}
       secondaryBtn={{ text: secondaryButton.text, onClick: secondaryButton.action }}>
       {store!.customization.deletionWizard.currentStep === 0 ? (
-        <SelectionModes
+        <Selector
+          type={Type.List}
+          options={SelectionModes}
           onSelect={(option) => store!.customization.deletionWizard.changeSelectionMode(option)} />
       ) : <></>}
       {store!.customization.deletionWizard.currentStep === 1 ? (
         <>
           { store!.customization.deletionWizard.selectionMode.name ===
-          AvailableSelectionModes.SECTIONS_BETWEEN_TWO_POINTS.name ? (
+          SelectionModes.SECTIONS_BETWEEN_TWO_POINTS.name ? (
             <Container>
               <StyledRow>
                 <Label>From:</Label>
@@ -90,34 +92,20 @@ export default observer(() => {
             </Container>
           ) : <></>}
           { store!.customization.deletionWizard.selectionMode.name ===
-          AvailableSelectionModes.BY_COLOR.name ? (
+          SelectionModes.BY_COLOR.name ? (
             <Container>
               <StyledRow>
                 <div className="col col-4">
                   <span>Color:</span>
                 </div>
                 <div className="col col-8">
-                  <div className="dropdown">
-                    <button
-                      className="btn btn-secondary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      style={{ backgroundColor: color || '#000000' }}
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      aria-label="Select color" />
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      {[].map((hex, index) => (
-                        <div
-                          className="dropdown-item"
-                          key={index}
-                          style={{ backgroundColor: hex }}
-                          onClick={() => setColor(hex)}>
-                          <br />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <ColorSelector
+                    options={{
+                      OP1: { hex: '#f20e0e' },
+                      OP2: { hex: '#0011aa' },
+                      OP3: { hex: '#00aa6f' }
+                    }}
+                    onSelect={() => null} />
                 </div>
               </StyledRow>
             </Container>
