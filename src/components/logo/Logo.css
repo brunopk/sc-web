@@ -1,15 +1,16 @@
 .logo {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Press Start 2P', cursive;
+  font-size: 17px;
 }
 
 .logo-red {
-  color: #ff0000!important;
+  color: var(--material-red-light);
 }
 
 .logo-green {
-  color: #00ff0b!important;
+  color: var(--material-green)!important;
 }
 
 .logo-blue {
-  color: #1423ff!important;
+  color: var(--material-blue-dark)!important;
 }

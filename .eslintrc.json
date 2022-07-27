@@ -1,42 +1,80 @@
 {
-  "env": {
-      "browser": true,
-      "es6": true
-  },
-  "extends": [
-      "plugin:react/recommended",
-      "airbnb"
-  ],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-  },
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-  },
-  "plugins": [
-      "react"
-  ],
-  "rules": {
-    "import/order": 0,
-    "no-plusplus": 0,
-    "operator-linebreak": 0,
-    "comma-dangle": 0,
-    "no-use-before-define": 0,
-    "no-param-reassign": 0,
-    "react/prop-types": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/no-array-index-key": 0,
-    "react/button-has-type": 0, 
-    "react/jsx-props-no-spreading": 0,
-    "react/jsx-closing-bracket-location": 0,
-    "jsx-a11y/label-has-associated-control": 0,
-    "jsx-a11y/no-static-element-interactions": 0,
-    "jsx-a11y/click-events-have-key-events": 0,
-    "object-curly-newline": 0
-  }
+    "parser": "@typescript-eslint/parser",
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
+    "rules": {
+      "semi": [ "error", "never" ],
+      "max-len": ["error", { "code": 120 }],
+      "no-plusplus": 0,
+      "operator-linebreak": 0,
+      "comma-dangle": 0,
+      "no-use-before-define": 0,
+      "no-param-reassign": 0,
+      "react/prop-types": 0, // Since we do not use prop-types
+      "react/require-default-props": 0, // Since we do not use prop-types
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+      "react/no-array-index-key": 0,
+      "react/button-has-type": 0, 
+      "react/jsx-props-no-spreading": 0,
+      "react/jsx-closing-bracket-location": 0,
+      "jsx-a11y/label-has-associated-control": 0,
+      "jsx-a11y/no-static-element-interactions": 0,
+      "jsx-a11y/click-events-have-key-events": 0,
+      "object-curly-newline": 0,
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+     ],
+     "import/order": ["error", {
+        "pathGroups": [{
+          "pattern": "~/**",
+          "group": "builtin"
+        }, {
+          "pattern": "~/**",
+          "group": "external"
+        }, {
+          "pattern": "~/**",
+          "group": "parent"
+        },
+        {
+          "pattern": "~/**",
+          "group": "sibling"
+        }, {
+          "pattern": "~/**",
+          "group": "index"
+        }]
+      }]
+    }
 }

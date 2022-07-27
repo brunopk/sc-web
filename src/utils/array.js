@@ -6,12 +6,12 @@
  * @returns Returns a new copy of the array with the replacement
  */
 function replace(array, value, newValue) {
-  const arrayAux = array.slice();
-  const index = arrayAux.indexOf(value);
+  const arrayAux = array.slice()
+  const index = arrayAux.indexOf(value)
   if (index !== -1) {
-    arrayAux[index] = newValue;
+    arrayAux[index] = newValue
   }
-  return arrayAux;
+  return arrayAux
 }
 
 /**
@@ -22,11 +22,11 @@ function replace(array, value, newValue) {
  * @returns Returns a new copy of the array with the replacement
  */
 function replaceAt(array, index, newValue) {
-  const arrayAux = array.slice();
+  const arrayAux = array.slice()
   if (index !== -1) {
-    arrayAux[index] = newValue;
+    arrayAux[index] = newValue
   }
-  return arrayAux;
+  return arrayAux
 }
 
-export { replace, replaceAt };
+export { replace, replaceAt }

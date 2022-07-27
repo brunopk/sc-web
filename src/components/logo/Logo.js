@@ -1,5 +1,5 @@
-import React from 'react';
-import './Logo.css';
+import React from 'react'
+import './Logo.css'
 
 function Logo() {
   return (
@@ -8,7 +8,7 @@ function Logo() {
       <strong><span className="logo-red">   CONTROLLER   </span></strong>
       <strong><span className="logo-blue"> WEB </span></strong>
     </div>
-  );
+  )
 }
 
-export default Logo;
+export default Logo

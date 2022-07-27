@@ -1,32 +1,59 @@
-import React, { useState } from 'react';
-import Switch from 'react-switch';
+import React, { useState } from 'react'
+import Switch from 'react-switch'
 
-function CardHeader({ id, title, isError, dataTarget, ariaExpanded, onToggle }) {
-  ariaExpanded = typeof ariaExpanded === 'boolean' && ariaExpanded;
-  const [toggleValue, setToggleValue] = useState(false);
+function CardHeader({
+  id,
+  title,
+  color,
+  headerRed,
+  headerGreen,
+  dataTarget,
+  ariaExpanded,
+  onToggle,
+  showHeaderTitle,
+  showHeaderButton
+}) {
+  const [toggleValue, setToggleValue] = useState(false)
   const onToggleWrapper = (value) => {
-    const newValue = !value;
-    setToggleValue(newValue);
-    onToggle(newValue);
-  };
+    const newValue = !value
+    setToggleValue(newValue)
+    onToggle(newValue)
+  }
+  let className = 'card-header '
+
+  ariaExpanded = typeof ariaExpanded === 'boolean' && ariaExpanded
+  className += headerRed ? 'alert-danger' : ''
+  className += headerGreen ? 'alert-success' : ''
 
   return (
-    <div className={`card-header ${isError ? 'alert-danger' : ''}`} id={id}>
+    <div className={className} id={id}>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-6 text-left">
-            <h5 className="mb-0">
+          <div className="col col-3 col-lg-1 text-left">
+            {showHeaderButton ? (
               <button
-                className={`btn ${isError ? 'text-danger' : 'btn-link'}`}
+                className="form-control color-button"
+                style={{ backgroundColor: color, borderColor: color }}
                 data-toggle="collapse"
                 data-target={dataTarget}
                 aria-expanded={ariaExpanded}
                 aria-controls={dataTarget.slice(1)}>
-                <span>{title}</span>
+                <span>{showHeaderTitle ? title : ''}</span>
               </button>
-            </h5>
+            ) : (
+              <h5 className="mb-0">
+                <button
+                  className="btn 'btn-link"
+                  data-toggle="collapse"
+                  data-target={dataTarget}
+                  aria-expanded={ariaExpanded}
+                  aria-controls={dataTarget.slice(1)}>
+                  <span>{showHeaderTitle ? title : ''}</span>
+                </button>
+              </h5>
+            )}
           </div>
-          <div className="col-6 justify-content-end align-items-center d-flex card-header-buttons">
+          <div className="col-9 col-lg-11 justify-content-end align-items-center d-flex card-header-buttons">
             {onToggle !== null ? (
               <label>
                 <Switch
@@ -44,38 +71,59 @@ function CardHeader({ id, title, isError, dataTarget, ariaExpanded, onToggle }) 
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function CardBody({ children, id, dataParent, ariaLabelledBy, ariaExpanded }) {
-  const className = typeof ariaExpanded === 'boolean' && ariaExpanded ? 'collapse show' : 'collapse';
+  const className = typeof ariaExpanded === 'boolean' && ariaExpanded ? 'collapse show' : 'collapse'
+
   return (
     <div id={id} className={className} data-parent={dataParent} aria-labelledby={ariaLabelledBy}>
       <div className="card-body">
         {children}
       </div>
     </div>
-  );
+  )
 }
 
-function Card({ children, id, isError, title, expanded, onToggle }) {
-  onToggle = typeof onToggle === 'undefined' ? null : onToggle;
-  isError = typeof isError === 'undefined' ? false : isError;
+function Card({
+  children,
+  id,
+  className,
+  title,
+  expanded,
+  onToggle,
+  color = null,
+  showHeaderButton = false,
+  showHeaderTitle = true,
+  headerRed = false,
+  headerGreen = false,
+}) {
+  onToggle = typeof onToggle === 'undefined' ? null : onToggle
 
+  // <CardBody id={id} ariaLabelledBy={`heading${id}`} dataParent="#accordion" ariaExpanded={expanded}>
   return (
-    <div className="card">
+    <div className={`card ${className}`}>
       <CardHeader
         id={`heading${id}`}
         title={title}
-        isError={isError}
+        color={color}
+        headerRed={headerRed}
+        headerGreen={headerGreen}
         dataTarget={`#${id}`}
         ariaExpanded={expanded}
-        onToggle={onToggle} />
-      <CardBody id={id} ariaLabelledBy={`heading${id}`} dataParent="#accordion" ariaExpanded={expanded}>
+        onToggle={onToggle}
+        showHeaderButton={showHeaderButton}
+        showHeaderTitle={showHeaderTitle} />
+      <CardBody
+        id={id}
+        dataParent="#accordion"
+        ariaLabelledBy={`heading${id}`}
+        ariaExpanded={expanded}>
         {children}
       </CardBody>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card
